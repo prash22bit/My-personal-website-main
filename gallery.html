@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Prasanth Aravapalli</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .gallery-item {
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        .gallery-item img {
+            border-radius: 8px;
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Prasanth Aravapalli</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#skills">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="gallery.html">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="portfolio.html">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <div class="row" id="gallery-container">
+                <!-- Images will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" id="modalImage" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Prasanth Aravapalli</h5>
+                    <p>B.Tech Computer Science and Engineering<br>SRM University, Andhra Pradesh</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>Connect With Me</h5>
+                    <div class="social-links">
+                        <a href="mailto:prasantharavapalli26@gmail.com" class="text-light me-3" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://github.com/prash22bit" class="text-light me-3" target="_blank" rel="noopener noreferrer" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/prasanth-aravapalli-867178291/" class="text-light" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; <span id="current-year">2025</span> Prasanth Aravapalli. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gallery images data
+        const images = [
+            { src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', title: 'Modern Development' },
+            { src: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6', title: 'Clean Code' },
+            { src: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd', title: 'Data Analytics' },
+            { src: 'https://images.unsplash.com/photo-1551434678-e076c223a692', title: 'Team Collaboration' },
+            { src: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8', title: 'Mobile Development' },
+            { src: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c', title: 'Web Development' }
+        ];
+
+        // Populate gallery
+        const galleryContainer = document.getElementById('gallery-container');
+        
+        images.forEach(image => {
+            const col = document.createElement('div');
+            col.className = 'col-md-4 mb-4';
+            col.innerHTML = `
+                <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" 
+                     data-img="${image.src}" data-title="${image.title}">
+                    <img src="${image.src}" alt="${image.title}" class="img-fluid">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">${image.title}</div>
+                    </div>
+                </div>
+            `;
+            galleryContainer.appendChild(col);
+        });
+
+        // Handle modal image display
+        const imageModal = document.getElementById('imageModal');
+        if (imageModal) {
+            imageModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const imgSrc = button.getAttribute('data-img');
+                const imgTitle = button.getAttribute('data-title');
+                
+                const modalImage = imageModal.querySelector('#modalImage');
+                const modalTitle = imageModal.querySelector('.modal-title');
+                
+                modalImage.src = imgSrc;
+                modalImage.alt = imgTitle;
+                if (modalTitle) {
+                    modalTitle.textContent = imgTitle;
+                }
+            });
+        }
+
+        // Update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
