@@ -207,21 +207,48 @@ img {
 }
 
 .nav__logo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-xs);
+  text-decoration: none;
 }
 
-.nav__logo-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--clr-text-primary);
-  border-radius: 50%;
-  display: inline-block;
-  animation: pulse-dot 2s ease-in-out infinite;
+.nav__logo-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: ui-monospace, 'SF Mono', 'Fira Code', 'Cascadia Code', Menlo, Consolas, monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.nav__logo:hover .nav__logo-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.nav__logo:active .nav__logo-badge {
+  transform: scale(0.96);
+}
+
+.nav__logo-bracket {
+  color: var(--clr-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.nav__logo-text {
+  color: var(--clr-text-primary);
+  margin: 0 1px;
+}
+
+.nav__logo:hover .nav__logo-bracket {
+  color: var(--clr-text-secondary);
 }
 
 @keyframes pulse-dot {
@@ -941,8 +968,9 @@ img {
     padding-top: max(0.85rem, env(safe-area-inset-top));
   }
 
-  .nav__logo {
-    font-size: 1.15rem;
+  .nav__logo-badge {
+    padding: 0.3rem 0.65rem;
+    font-size: 1.05rem;
   }
 
   .nav__toggle {
